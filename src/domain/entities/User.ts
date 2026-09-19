@@ -5,7 +5,7 @@ import { UserProps } from "../types/User-types";
 export class User {
   private _id: string;
   private _name: string;
-  private _email: string | null;
+  private _email: string;
   private _password: string | null;
   private _phone: string | null;
   private _role: Role;
@@ -14,7 +14,7 @@ export class User {
   private constructor(props: UserProps, id?: string) {
     this._id = id ?? randomUUID();
     this._name = props.name;
-    this._email = props.email ?? null;
+    this._email = props.email;
     this._password = props.password_hash ?? null;
     this._phone = props.phone ?? null;
     this._role = props.role ?? Role.MEMBER;
@@ -31,7 +31,7 @@ export class User {
   get name(): string {
     return this._name;
   }
-  get email(): string | null {
+  get email(): string {
     return this._email;
   }
   get password(): string | null {
@@ -42,5 +42,9 @@ export class User {
   }
   get managedById(): string | null {
     return this._managed_by_id;
+  }
+
+  get phone(): string | null {
+    return this._phone;
   }
 }
