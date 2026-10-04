@@ -25,8 +25,8 @@ export class User {
     return new User(props, id);
   }
 
-  static restore(props: UserProps): User {
-    return new User(props);
+  static restore(props: UserProps, id: string): User {
+    return new User({ ...props }, id);
   }
 
   get id(): string {
