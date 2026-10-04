@@ -1,12 +1,18 @@
 {
-
+  "name": "api-primeira-igreja-batista",
+  "version": "0.0.0",
   "scripts": {
-    "dev": "ts-node-transpile-only src/server.ts"
+    "test": "jest"
   },
-
+  "types": "module",
   "devDependencies": {
+    "@swc/core": "^1.16.13",
+    "@swc/jest": "^0.2.39",
+    "@types/jest": "^30.0.0",
     "@types/node": "^26.2.0",
+    "jest": "^30.5.2",
     "ts-node": "^10.9.2",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }
 }
