@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
 import { Role } from "../../enums/Role";
 import { UserProps } from "../../types/User-types";
-import { UserName } from "./userNome";
+import { UserName } from "./userName";
 import { UserEmail } from "./userEmail";
 
 export class User {
