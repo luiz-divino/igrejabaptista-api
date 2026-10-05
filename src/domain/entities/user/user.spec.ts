@@ -11,6 +11,7 @@ describe("User Entity", () => {
 
   test("Should to return a new User(new Entity)", () => {
     const mockUser: UserProps = {
+      id: "oashdioa93y42394y",
       name: "luiz fernando",
       email: "nando@gmail.com",
       password_hash: "123456",
