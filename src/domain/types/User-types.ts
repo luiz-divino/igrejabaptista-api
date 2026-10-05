@@ -1,10 +1,11 @@
 import { Role } from "../enums/Role";
 
 export interface UserProps {
+  id?: string;
   name: string;
   email: string;
-  password_hash?: string | null;
+  password_hash: string;
   phone?: string | null;
-  role: Role;
+  role?: Role;
   managed_by_id?: string | null;
 }
