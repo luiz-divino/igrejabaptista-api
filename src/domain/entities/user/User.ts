@@ -8,7 +8,7 @@ export class User {
   private _id: string;
   private _name: UserName;
   private _email: UserEmail;
-  private _password: string | null;
+  private _password: string;
   private _phone: string | null;
   private _role: Role;
   private _managed_by_id: string | null;
@@ -17,7 +17,7 @@ export class User {
     this._id = id ?? randomUUID();
     this._name = new UserName(props.name);
     this._email = new UserEmail(props.email);
-    this._password = props.password_hash ?? null;
+    this._password = props.password_hash;
     this._phone = props.phone ?? null;
     this._role = props.role ?? Role.MEMBER;
     this._managed_by_id = props.managed_by_id ?? null;
@@ -40,7 +40,7 @@ export class User {
   get email(): string {
     return this._email.getValue();
   }
-  get password(): string | null {
+  get password(): string {
     return this._password;
   }
   get role(): Role {
