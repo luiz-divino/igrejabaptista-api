@@ -1,11 +1,13 @@
 import { randomUUID } from "crypto";
 import { Role } from "../../enums/Role";
 import { UserProps } from "../../types/User-types";
+import { UserName } from "./userNome";
+import { UserEmail } from "./userEmail";
 
 export class User {
   private _id: string;
-  private _name: string;
-  private _email: string;
+  private _name: UserName;
+  private _email: UserEmail;
   private _password: string | null;
   private _phone: string | null;
   private _role: Role;
@@ -13,8 +15,8 @@ export class User {
 
   private constructor(props: UserProps, id?: string) {
     this._id = id ?? randomUUID();
-    this._name = props.name;
-    this._email = props.email;
+    this._name = new UserName(props.name);
+    this._email = new UserEmail(props.email);
     this._password = props.password_hash ?? null;
     this._phone = props.phone ?? null;
     this._role = props.role ?? Role.MEMBER;
@@ -33,10 +35,10 @@ export class User {
     return this._id;
   }
   get name(): string {
-    return this._name;
+    return this._name.getValue();
   }
   get email(): string {
-    return this._email;
+    return this._email.getValue();
   }
   get password(): string | null {
     return this._password;
