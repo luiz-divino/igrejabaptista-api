@@ -1,9 +1,9 @@
-import { IuserRepository } from "../contracts";
-import { User } from "../../domain/entities/user/User";
-import { UserModel, UserResponse } from "../models";
-import { IUseCaseService } from "../../domain/usecases";
-import { UserVerificationError } from "../../domain/errors/verification";
-import { Role } from "../../domain/enums/Role";
+import { User } from "../../../domain/entities/user-entity/User";
+import { UserModel, UserResponse } from "../../models";
+import { IUseCaseService } from "../../../domain/usecases";
+import { UserVerificationError } from "../../../domain/errors/verification";
+import { Role } from "../../../domain/enums/Role";
+import { IuserRepository } from "@data/contracts/user-repository";
 
 export class CreateUserService implements IUseCaseService {
   constructor(private userServiceRepository: IuserRepository) {}
