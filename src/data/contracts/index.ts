@@ -1,1 +1,1 @@
-export * from './user-repository'
+export * as IuserRepository from "./user-repository";
