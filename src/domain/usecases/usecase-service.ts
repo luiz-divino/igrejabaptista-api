@@ -1,3 +1,5 @@
-export interface IUseCase<Input = void, Output = void> {
-  execute(request?: Input): Promise<Output>;
+import { UserModel, UserResponse } from "../../data/models";
+
+export interface IUseCaseService {
+  execute(request: UserModel): Promise<UserResponse | null>;
 }
