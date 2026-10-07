@@ -1,5 +1,5 @@
 import { User } from "@/domain/entities/user-entity/User";
-import { UserModel, UserResponse } from "@/data/models/user";
+import { CreateUserDTO, UserResponse } from "@/data/models/user";
 import { IUseCaseService } from "@/domain/usecases";
 import { UserVerificationError } from "@/domain/errors/verification";
 import { Role } from "@/domain/enums/Role";
@@ -7,7 +7,7 @@ import { IUserRepository } from "@data/contracts/user-repository";
 
 export class CreateUserService implements IUseCaseService {
   constructor(private userServiceRepository: IUserRepository) {}
-  async execute(request: UserModel): Promise<UserResponse | null> {
+  async execute(request: CreateUserDTO): Promise<UserResponse | null> {
     const emailExists = await this.userServiceRepository.findByEmail(
       request.email,
     );
@@ -15,13 +15,12 @@ export class CreateUserService implements IUseCaseService {
       throw new UserVerificationError();
     }
     const user = User.create({
-      id: request.id,
       name: request.name,
-      password_hash: request.password,
+      password: request.password,
       email: request.email,
       phone: request.phone || null,
       role: request.role || Role.MEMBER,
-      managed_by_id: request.managedById ?? null,
+      managedById: request.managedById ?? null,
     });
 
     await this.userServiceRepository.save(user);
