@@ -1,12 +1,12 @@
-import { User } from "../../../domain/entities/user-entity/User";
-import { UserModel, UserResponse } from "../../models";
-import { IUseCaseService } from "../../../domain/usecases";
-import { UserVerificationError } from "../../../domain/errors/verification";
-import { Role } from "../../../domain/enums/Role";
-import { IuserRepository } from "@data/contracts/user-repository";
+import { User } from "@/domain/entities/user-entity/User";
+import { UserModel, UserResponse } from "@/data/models/user";
+import { IUseCaseService } from "@/domain/usecases";
+import { UserVerificationError } from "@/domain/errors/verification";
+import { Role } from "@/domain/enums/Role";
+import { IUserRepository } from "@data/contracts/user-repository";
 
 export class CreateUserService implements IUseCaseService {
-  constructor(private userServiceRepository: IuserRepository) {}
+  constructor(private userServiceRepository: IUserRepository) {}
   async execute(request: UserModel): Promise<UserResponse | null> {
     const emailExists = await this.userServiceRepository.findByEmail(
       request.email,
