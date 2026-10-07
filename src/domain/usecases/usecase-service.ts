@@ -1,5 +1,5 @@
-import { UserModel, UserResponse } from "../../data/models";
+import { CreateUserDTO, UserResponse } from "@/data/models/user";
 
 export interface IUseCaseService {
-  execute(request: UserModel): Promise<UserResponse | null>;
+  execute(request: CreateUserDTO): Promise<UserResponse | null>;
 }
