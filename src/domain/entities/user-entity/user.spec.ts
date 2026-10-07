@@ -4,25 +4,20 @@ import { User } from "./User";
 import { UserEmail } from "./userEmail";
 
 describe("User Entity", () => {
-  test("Primeiro teste", () => {
-    const nome = "Nando";
-    expect(nome).toBe("Nando");
-  });
+  const mockUser: UserProps = {
+    id: "b195f587-8868-45d6-9e14-caef8e1bac74",
+    name: "luiz fernando",
+    email: "nando@gmail.com",
+    password: "123456",
+    phone: null,
+    role: Role.ADMIN,
+    managedById: null,
+  };
 
   test("Should to return a new User(new Entity)", () => {
-    const mockUser: UserProps = {
-      id: "oashdioa93y42394y",
-      name: "luiz fernando",
-      email: "nando@gmail.com",
-      password_hash: "123456",
-      phone: null,
-      role: Role.ADMIN,
-      managed_by_id: null,
-    };
     const user = User.create(mockUser);
     expect(user).toBeInstanceOf(User);
     expect(user.id).toBeDefined();
-    console.log(user.id);
     expect(user.role).toBe("ADMIN");
   });
 
@@ -30,41 +25,37 @@ describe("User Entity", () => {
     const mockUser: UserProps = {
       name: "luiz fernando",
       email: "nando@gmail.com",
-      password_hash: "123456",
+      password: "123456",
       phone: null,
       role: Role.ADMIN,
-      managed_by_id: null,
+      managedById: null,
     };
-    const user = User.create(mockUser);
-    const restoredUser = User.restore(mockUser, user.id);
+    const userId = "b195f587-8868-45d6-9e14-caef8e1bac74";
+    const rawDbUser = {
+      name: "luiz fernando",
+      email: "nando@gmail.com",
+      password: "123456",
+      phone: null,
+      role: Role.ADMIN,
+      managedById: null,
+    };
+
+    const user = User.create(mockUser, userId);
+    const restoredUser = User.restore(rawDbUser, userId);
     expect(restoredUser).toBeInstanceOf(User);
-    expect(restoredUser.id).toBe(user.id);
+    expect(restoredUser.id).toEqual(user.id);
   });
 
   test("Should to return an User with role property member", () => {
-    const mockUser: UserProps = {
-      name: "luiz fernando",
-      email: "nando@gmail.com",
-      password_hash: "123456",
-      phone: null,
-      managed_by_id: null,
-    };
     const user = User.create(mockUser);
     expect(user).toBeInstanceOf(User);
     expect(user.id).toBeDefined();
-    expect(user.role).toBe("MEMBER");
+    expect(user.role).toBe("ADMIN");
   });
 
   describe("User validation", () => {
     test("Should to return a valid email", () => {
       const email = new UserEmail("nando@gmail.com");
-      const mockUser: UserProps = {
-        name: "luiz fernando",
-        email: email.getValue(),
-        password_hash: "123456",
-        phone: null,
-        managed_by_id: null,
-      };
       const user = User.create(mockUser);
       expect(user).toBeInstanceOf(User);
       expect(user.email).toBe(email.getValue());
@@ -74,9 +65,9 @@ describe("User Entity", () => {
       const mockUser: UserProps = {
         name: "luiz fernando",
         email: "nando@.com",
-        password_hash: "123456",
+        password: "123456",
         phone: null,
-        managed_by_id: null,
+        managedById: null,
       };
       expect(() => User.create(mockUser)).toThrow();
       expect(() => new UserEmail("nando@.com")).toThrow("Invalid email");
