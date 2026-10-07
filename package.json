@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "test": "vitest",
-    "build": "tsc build --ignoreConfig src/server.ts"
+    "build": "tsup --tsconfig tsconfig.build.json ./src/server.ts",
+    "dev": "tsx watch ./src/server.ts"
   },
   "types": "module",
   "type": "module",
