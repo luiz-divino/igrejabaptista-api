@@ -17,18 +17,18 @@ export class User {
     this._id = id ?? randomUUID();
     this._name = new UserName(props.name);
     this._email = new UserEmail(props.email);
-    this._password = props.password_hash;
+    this._password = props.password;
     this._phone = props.phone ?? null;
     this._role = props.role ?? Role.MEMBER;
-    this._managed_by_id = props.managed_by_id ?? null;
+    this._managed_by_id = props.managedById ?? null;
   }
 
   static create(props: UserProps, id?: string): User {
-    return new User(props, id);
+    return new User({ ...props }, id);
   }
 
   static restore(props: UserProps, id: string): User {
-    return new User({ ...props }, id);
+    return new User(props, id);
   }
 
   get id(): string {
