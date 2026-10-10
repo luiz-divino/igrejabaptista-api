@@ -1,14 +1,16 @@
-import { IDataBaseConnection } from "@/infra/Database-connection";
+import { IDataBaseConnection } from "@/infra/contracts/Database-connection";
 import mysql, { Pool, ResultSetHeader, RowDataPacket } from "mysql2/promise";
 
 export class MySqlHelper implements IDataBaseConnection {
   private client: Pool | null = null;
 
-  constructor(private readonly connectionString: string) {}
-
   async connect(): Promise<void> {
     if (!this.client) {
-      this.client = mysql.createPool(this.connectionString);
+      this.client = mysql.createPool({
+        uri: process.env.DATABASE_URL || "",
+        connectionLimit: 10,
+        waitForConnections: true,
+      });
     }
   }
 
